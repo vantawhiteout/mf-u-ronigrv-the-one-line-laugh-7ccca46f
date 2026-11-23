@@ -4,16 +4,16 @@ import { dirname } from "node:path";
 /**
  * The One-Line Laugh — one funny sentence, at most 200 characters.
  *
- * The line stands alone: a single sentence with a turn at the end that
- * recontextualizes the setup, an everyday truth, and no wasted words.
+ * The line stands alone: a single sentence whose last words turn the setup
+ * into something the reader did not expect but instantly recognises.
  */
-const LINE =
-  "My therapist says I have abandonment issues, so I ghosted her.";
+const LINE = "In our house, 'fine' is the first stage of grief.";
 
 const OUTPUT = "/output/entry.txt";
 
 function writeEntry(path: string, text: string): void {
-  if (Buffer.byteLength(text, "utf8") > 200 || text.trim().length === 0) {
+  const characters = Array.from(text).length;
+  if (characters < 1 || characters > 200 || text.trim().length === 0) {
     throw new Error("entry must be 1-200 UTF-8 characters of non-whitespace text");
   }
   mkdirSync(dirname(path), { recursive: true });
